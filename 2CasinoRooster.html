@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRG Studio Casino - Premium Online Gaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #e63946;
+            --dark-red: #9d0208;
+            --orange: #fb8500;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --gradient-1: linear-gradient(135deg, #e63946 0%, #fb8500 100%);
+            --gradient-2: linear-gradient(135deg, #9d0208 0%, #e63946 100%);
+            --gradient-3: linear-gradient(135deg, #fb8500 0%, #9d0208 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(230, 57, 70, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(251, 133, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(230, 57, 70, 0.1) 0%, transparent 50%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(230, 57, 70, 0.6);
+        }
+
+        .loader-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        header {
+            background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, rgba(26,26,26,0.95) 100%);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-red);
+            box-shadow: 0 4px 30px rgba(230, 57, 70, 0.4);
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(230, 57, 70, 0.6));
+            transition: transform 0.3s;
+            border-radius: 10px;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient-2);
+            color: white;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(230, 57, 70, 0.7);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--orange);
+            border: 2px solid var(--orange);
+        }
+
+        .btn-secondary:hover {
+            background: var(--orange);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        .btn-large {
+            padding: 16px 45px;
+            font-size: 1rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            margin-top: 90px;
+            padding: 80px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            gap: 60px;
+            min-height: calc(100vh - 90px);
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-1);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 35px;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 50px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 550px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 40px rgba(230, 57, 70, 0.5));
+            animation: float 4s ease-in-out infinite;
+            border-radius: 20px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(1deg); }
+            50% { transform: translateY(-25px) rotate(0deg); }
+            75% { transform: translateY(-15px) rotate(-1deg); }
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.3) 0%, transparent 70%);
+            z-index: -1;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .games-section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .section-header h2 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary-red);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.4);
+        }
+
+        .game-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .game-image {
+            height: 220px;
+            background: var(--gradient-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .game-image i {
+            transition: transform 0.4s;
+            z-index: 2;
+        }
+
+        .game-card:hover .game-image i {
+            transform: scale(1.2);
+        }
+
+        .game-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, var(--card-bg) 100%);
+        }
+
+        .game-info {
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .game-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .game-info p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-rating {
+            color: var(--orange);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .game-players {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        .promotions {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.15) 0%, rgba(251, 133, 0, 0.08) 100%);
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promotions::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.2) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .promotions-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 45px;
+            border: 2px solid var(--primary-red);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .promo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+
+        .promo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 70px rgba(230, 57, 70, 0.5);
+            border-color: var(--orange);
+        }
+
+        .promo-badge {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: var(--gradient-1);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+        }
+
+        .promo-card h3 {
+            font-size: 1.9rem;
+            margin-bottom: 15px;
+            color: var(--primary-red);
+            font-weight: 800;
+        }
+
+        .promo-card .bonus-amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 25px 0;
+            line-height: 1;
+        }
+
+        .promo-card p {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .promo-features {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .promo-features li {
+            padding: 10px 0;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .promo-features li i {
+            color: var(--orange);
+            font-size: 1.1rem;
+        }
+
+        .features {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 45px;
+            margin-top: 60px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 40px 30px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 15px 50px rgba(230, 57, 70, 0.3);
+        }
+
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.2rem;
+            box-shadow: 0 10px 40px rgba(230, 57, 70, 0.4);
+            transition: transform 0.4s;
+        }
+
+        .feature:hover .feature-icon {
+            transform: rotate(360deg);
+        }
+
+        .feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature p {
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .cta-section {
+            background: var(--gradient-2);
+            padding: 80px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--dark-red);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-white:hover {
+            background: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: var(--darker-bg);
+            border-top: 3px solid var(--primary-red);
+            padding: 70px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            color: var(--orange);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-red);
+            transform: translateX(5px);
+        }
+
+        .footer-section a i {
+            font-size: 0.8rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .payment-methods i {
+            font-size: 2.5rem;
+            color: var(--text-gray);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .payment-methods i:hover {
+            color: var(--orange);
+            transform: scale(1.1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-red);
+            transform: translateY(-5px);
+            border-color: var(--orange);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 35px;
+            border-top: 1px solid #333;
+            color: var(--text-gray);
+        }
+
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+
+        .age-restriction {
+            display: inline-block;
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin: 0 10px;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s;
+            border: 2px solid var(--primary-red);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-red);
+        }
+
+        .modal h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--dark-bg);
+            border: 2px solid #333;
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+        }
+
+        .modal-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--text-gray);
+        }
+
+        .modal-footer a {
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+            }
+
+            .hero-content {
+                order: 2;
+            }
+
+            .hero-image {
+                order: 1;
+                margin-bottom: 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-buttons {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .games-grid,
+            .promotions-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+
+            .modal-content {
+                padding: 35px 25px;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-red);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transform: translateX(400px);
+            transition: transform 0.4s;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .notification-content h4 {
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .notification-content p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <img src="https://image.qwenlm.ai/public_source/b099ae2f-a875-4b04-b092-801db8ae209a/1e7447e39-437e-4103-a1db-fd4f6493e963.png" alt="CRG Studio Logo" class="loader-logo">
+        <div class="loader-text">Loading Casino...</div>
+    </div>
+
+    <div class="bg-animation"></div>
+
+    <header id="header">
+        <nav>
+            <div class="logo" onclick="scrollToTop()">
+                <img src="https://image.qwenlm.ai/public_source/b099ae2f-a875-4b04-b092-801db8ae209a/1e7447e39-437e-4103-a1db-fd4f6493e963.png" alt="CRG Studio Casino">
+                <span class="logo-text">CRG Casino</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#promotions">Promotions</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#vip">VIP</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="openModal('login')">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn btn-primary" onclick="openModal('signup')">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-gift"></i>
+                <span>WELCOME BONUS UP TO $5,000 + 200 FREE SPINS</span>
+            </div>
+            <h1>
+                Experience <span>Premium</span> Online Gaming
+            </h1>
+            <p>
+                Join CRG Studio Casino and discover the ultimate gaming experience with over 2,000+ 
+                games, exclusive bonuses, instant withdrawals, and 24/7 VIP support. Your fortune awaits!
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-large" onclick="openModal('signup')">
+                    <i class="fas fa-play"></i> Play Now
+                </button>
+                <button class="btn btn-secondary btn-large" onclick="scrollToSection('games')">
+                    <i class="fas fa-gamepad"></i> Browse Games
+                </button>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-target="2000">0</span>
+                    <span class="stat-label">Games</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="50000">0</span>
+                    <span class="stat-label">Players</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="98">0</span>
+                    <span class="stat-label">Payout %</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-glow"></div>
+            <img src="https://image.qwenlm.ai/public_source/b099ae2f-a875-4b04-b092-801db8ae209a/1e7447e39-437e-4103-a1db-fd4f6493e963.png" alt="CRG Studio Mascot">
+        </div>
+    </section>
+
+    <section class="games-section" id="games">
+        <div class="section-header fade-in">
+            <h2>Popular <span>Games</span></h2>
+            <p>Choose from our extensive collection of premium casino games with high RTP rates</p>
+        </div>
+        
+        <div class="games-grid">
+            <div class="game-card fade-in" onclick="playGame('Slots')">
+                <div class="game-image">
+                    <i class="fas fa-slot-machine"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Slots</h3>
+                    <p>Spin to win with hundreds of themed slot machines and progressive jackpots</p>
+                    <div class="game-meta">
+                        <span class="game-rating">
+                            <i class="fas fa-star"></i> 4.9
+                        </span>
+                        <span class="game-players">
+                            <i class="fas fa-users"></i> 12.5K playing
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card fade-in" onclick="playGame('Blackjack')">
+                <div class="game-image" style="background: var(--gradient-3);">
+                    <i class="fas fa-cards"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Blackjack</h3>
+                    <p>Master the table with classic and modern blackjack variations</p>
+                    <div class="game-meta">
+                        <span class="game-rating">
+                            <i class="fas fa-star"></i> 4.8
+                        </span>
+                        <span class="game-players">
+                            <i class="fas fa-users"></i> 8.3K playing
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card fade-in" onclick="playGame('Roulette')">
+                <div class="game-image" style="background: var(--gradient-2);">
+                    <i class="fas fa-dharmachakra"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Roulette</h3>
+                    <p>Experience the thrill of European, American, and French roulette</p>
+                    <div class="game-meta">
+                        <span class="game-rating">
+                            <i class="fas fa-star"></i> 4.7
+                        </span>
+                        <span class="game-players">
+                            <i class="fas fa-users"></i> 6.7K playing
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card fade-in" onclick="playGame('Poker')">
+                <div class="game-image" style="background: var(--gradient-1);">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Poker</h3>
+                    <p>Test your skills in Texas Hold'em, Omaha, and live poker tournaments</p>
+                    <div class="game-meta">
+                        <span class="game-rating">
+                            <i class="fas fa-star"></i> 4.9
+                        </span>
+                        <span class="game-players">
+                            <i class="fas fa-users"></i> 15.2K playing
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card fade-in" onclick="playGame('Live Casino')">
+                <div class="game-image" style="background: var(--gradient-3);">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Live Casino</h3>
+                    <p>Play with real dealers in our immersive live casino environment</p>
+                    <div class="game-meta">
+                        <span class="game-rating">
+                            <i class="fas fa-star"></i> 5.0
+                        </span>
+                        <span class="game-players">
+                            <i class="fas fa-users"></i> 22.1K playing
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card fade-in" onclick="playGame('Specialty')">
+                <div class="game-image" style="background: var(--gradient-2);">
+                    <i class="fas fa-dice"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Specialty Games</h3>
+                    <p>Explore dice games, baccarat, scratch cards, and more</p>
+                    <div class="game-meta">
+                        <span class="game-rating">
+                            <i class="fas fa-star"></i> 4.6
+                        </span>
+                        <span class="game-players">
+                            <i class="fas fa-users"></i> 5.4K playing
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="promotions" id="promotions">
+        <div class="section-header fade-in">
+            <h2>Exclusive <span>Promotions</span></h2>
+            <p>Maximize your winnings with our incredible bonus offers and rewards</p>
+        </div>
+
+        <div class="promotions-grid">
+            <div class="promo-card fade-in">
+                <span class="promo-badge">🔥 HOT</span>
+                <h3>Welcome Package</h3>
+                <div class="bonus-amount">$5,000</div>
+                <p>Plus 200 Free Spins on your first three deposits</p>
+                <ul class="promo-features">
+                    <li><i class="fas fa-check-circle"></i> 100% match up to $2,000 on 1st deposit</li>
+                    <li><i class="fas fa-check-circle"></i> 50% match up to $2,000 on 2nd deposit</li>
+                    <li><i class="fas fa-check-circle"></i> 25% match up to $1,000 on 3rd deposit</li>
+                    <li><i class="fas fa-check-circle"></i> 200 Free Spins on Starburst</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;" onclick="openModal('signup')">
+                    <i class="fas fa-gift"></i> Claim Bonus
+                </button>
+            </div>
+
+            <div class="promo-card fade-in">
+                <span class="promo-badge">⏰ WEEKLY</span>
+                <h3>Reload Bonus</h3>
+                <div class="bonus-amount">50%</div>
+                <p>Every Friday reload bonus up to $500</p>
+                <ul class="promo-features">
+                    <li><i class="fas fa-check-circle"></i> Valid every Friday 00:00-23:59</li>
+                    <li><i class="fas fa-check-circle"></i> Minimum deposit $50</li>
+                    <li><i class="fas fa-check-circle"></i> 35x wagering requirement</li>
+                    <li><i class="fas fa-check-circle"></i> All games contribute 100%</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;" onclick="showNotification('Bonus', 'Friday bonus will be available soon!')">
+                    <i class="fas fa-bell"></i> Get Notified
+                </button>
+            </div>
+
+            <div class="promo-card fade-in">
+                <span class="promo-badge">👑 VIP</span>
+                <h3>High Roller Bonus</h3>
+                <div class="bonus-amount">$10,000</div>
+                <p>Exclusive VIP package for high stakes players</p>
+                <ul class="promo-features">
+                    <li><i class="fas fa-check-circle"></i> Minimum deposit $1,000</li>
+                    <li><i class="fas fa-check-circle"></i> Personal account manager</li>
+                    <li><i class="fas fa-check-circle"></i> Exclusive tournaments entry</li>
+                    <li><i class="fas fa-check-circle"></i> Priority withdrawals (2 hours)</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;" onclick="openModal('vip')">
+                    <i class="fas fa-crown"></i> Join VIP
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="section-header fade-in">
+            <h2>Why Choose <span>CRG Casino</span></h2>
+            <p>Experience the difference with our premium features and services</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure & Licensed</h3>
+                <p>Fully licensed and regulated with 256-bit SSL encryption for maximum security</p>
+            </div>
+
+            <div class="feature fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Instant Withdrawals</h3>
+                <p>Get your winnings within 24 hours guaranteed with our fast payout system</p>
+            </div>
+
+            <div class="feature fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock customer service via live chat, email, and phone</p>
+            </div>
+
+            <div class="feature fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Gaming</h3>
+                <p>Play anywhere with our fully optimized mobile platform for iOS and Android</p>
+            </div>
+
+            <div class="feature fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3>Daily Rewards</h3>
+                <p>Exclusive bonuses, cashback offers, and loyalty points on every bet</p>
+            </div>
+
+            <div class="feature fade-in">
+                <div class="feature-icon">
+                    <i class="fas fa-random"></i>
+                </div>
+                <h3>Fair Gaming</h3>
+                <p>Certified RNG for 100% fair and random outcomes, audited monthly</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Win Big?</h2>
+            <p>Join thousands of players who are already winning at CRG Studio Casino. Sign up now and claim your welcome bonus!</p>
+            <div class="cta-buttons">
+                <button class="btn btn-white btn-large" onclick="openModal('signup')">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                <button class="btn btn-outline btn-large" onclick="scrollToSection('games')">
+                    <i class="fas fa-gamepad"></i> View Games
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-gamepad"></i> Games</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Slots</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Table Games</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Live Casino</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Jackpots</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> New Games</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Popular</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fas fa-gift"></i> Promotions</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Welcome Bonus</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Weekly Bonuses</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> VIP Program</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Tournaments</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Refer a Friend</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cashback</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fas fa-headset"></i> Support</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Responsible Gaming</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fas fa-credit-card"></i> Payment Methods</h3>
+                <p style="color: var(--text-gray); margin-bottom: 15px;">
+                    Secure and fast transactions with multiple payment options
+                </p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa" title="Visa"></i>
+                    <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                    <i class="fab fa-bitcoin" title="Bitcoin"></i>
+                    <i class="fab fa-cc-paypal" title="PayPal"></i>
+                    <i class="fas fa-university" title="Bank Transfer"></i>
+                    <i class="fab fa-ethereum" title="Ethereum"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 CRG Studio Casino. All rights reserved.</p>
+            <p>
+                <span class="age-restriction">18+</span>
+                Play Responsibly | Gambling can be addictive
+            </p>
+            <p style="margin-top: 15px; font-size: 0.9rem;">
+                <i class="fas fa-lock"></i> Secured by 256-bit SSL Encryption | Licensed & Regulated
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('login')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary form-submit">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            <div class="modal-footer">
+                <p>Don't have an account? <a href="#" onclick="switchModal('login', 'signup')">Sign Up</a></p>
+                <p style="margin-top: 10px;"><a href="#">Forgot Password?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('signup')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+            <form onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary form-submit">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+            <div class="modal-footer">
+                <p>Already have an account? <a href="#" onclick="switchModal('signup', 'login')">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="vipModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('vip')">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-crown"></i> VIP Application</h2>
+            <form onsubmit="handleVIP(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label>Expected Monthly Deposit</label>
+                    <input type="text" placeholder="e.g., $5,000+" required>
+                </div>
+                <button type="submit" class="btn btn-primary form-submit">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </form>
+            <div class="modal-footer">
+                <p>Our VIP team will contact you within 24 hours</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <div class="notification-icon">
+            <i class="fas fa-bell"></i>
+        </div>
+        <div class="notification-content">
+            <h4 id="notificationTitle">Notification</h4>
+            <p id="notificationMessage">Message here</p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function openModal(type) {
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(type) {
+            const modal = document.getElementById(type + 'Modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function switchModal(from, to) {
+            closeModal(from);
+            setTimeout(() => { openModal(to); }, 300);
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        function handleLogin(e) {
+            e.preventDefault();
+            closeModal('login');
+            showNotification('Success', 'Welcome back! Login successful.');
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            closeModal('signup');
+            showNotification('Success', 'Account created! Welcome to CRG Casino.');
+        }
+
+        function handleVIP(e) {
+            e.preventDefault();
+            closeModal('vip');
+            showNotification('Success', 'VIP application submitted! We will contact you soon.');
+        }
+
+        function showNotification(title, message) {
+            const notification = document.getElementById('notification');
+            document.getElementById('notificationTitle').textContent = title;
+            document.getElementById('notificationMessage').textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => { notification.classList.remove('show'); }, 4000);
+        }
+
+        function playGame(gameName) {
+            showNotification('Game Loading', `Loading ${gameName}... Please wait.`);
+            setTimeout(() => {
+                showNotification('Info', 'Game demo would launch here in production.');
+            }, 1500);
+        }
+
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCount = () => {
+                    current += step;
+                    if (current < target) {
+                        if (target >= 1000) {
+                            stat.textContent = Math.floor(current / 1000) + 'K+';
+                        } else {
+                            stat.textContent = Math.floor(current) + (target < 100 ? '%' : '+');
+                        }
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        if (target >= 1000) {
+                            stat.textContent = (target / 1000) + 'K+';
+                        } else {
+                            stat.textContent = target + (target < 100 ? '%' : '+');
+                        }
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.fade-in').forEach(el => { observer.observe(el); });
+
+        setTimeout(() => {
+            const heroStats = document.querySelector('.hero-stats');
+            if (heroStats) {
+                heroStats.classList.add('visible');
+                animateStats();
+            }
+        }, 2000);
+
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const navButtons = document.querySelector('.nav-buttons');
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+                navButtons.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(10, 10, 10, 0.98)';
+                navLinks.style.padding = '20px';
+                navLinks.style.borderBottom = '2px solid var(--primary-red)';
+                
+                navButtons.style.display = 'flex';
+                navButtons.style.flexDirection = 'column';
+                navButtons.style.position = 'absolute';
+                navButtons.style.top = '100%';
+                navButtons.style.left = '0';
+                navButtons.style.right = '0';
+                navButtons.style.background = 'rgba(10, 10, 10, 0.98)';
+                navButtons.style.padding = '20px';
+                navButtons.style.borderBottom = '2px solid var(--primary-red)';
+                navButtons.style.marginTop = '200px';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('mouseenter', function() { this.style.zIndex = '10'; });
+            card.addEventListener('mouseleave', function() { this.style.zIndex = '1'; });
+        });
+
+        console.log('%c🎰 Welcome to CRG Studio Casino! 🎰', 'font-size: 20px; color: #e63946; font-weight: bold;');
+    </script>
+</body>
+</html>
+
